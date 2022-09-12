@@ -1,0 +1,90 @@
+#%RAML 1.0
+title: RetrieveConsolidatedRoutesAndSchedules webApp XPAPI
+description: This RAML file will retrive consolidated Routes and Schedules for webApp
+uses:
+  common: /libraries/common/commonBussiness-library.raml
+  routes: /libraries/routes/routes-bussiness-library.raml
+  schdule: /libraries/schedules/schdules-bussiness-library.raml
+/booking: 
+  /{transportType}:
+    /routes:
+      get:
+        is:
+          - common.transactionId
+          - common.companyName
+          - common.departureLocation
+          - common.destinationLocation
+        responses:
+          200:
+            body:
+              application/json: 
+                type: routes.getRoutesResponse  
+                example: !include /libraries/routes/examples/getRoutes-200Response-example.json         
+          400:
+           body:
+            application/json:
+              type: common.commonError
+              example: !include /libraries/common/examples/400Response-example.json
+          404:
+           body:
+            application/json:
+              type: common.commonError  
+              example: !include /libraries/common/examples/404Response-example.json
+          500:
+           body:
+            application/json:
+              type: common.commonError     
+              example: !include /libraries/common/examples/500Response-example.json
+    /schedules:   
+      get:
+        is:
+          - common.transactionId
+          - common.companyName
+          - common.departureLocation
+          - common.destinationLocation
+          - common.requestTimeZone
+        responses:
+          200:
+            body:
+              application/json:
+                type: schdule.getScheduleResponse
+                example: !include /libraries/schedules/examples/getSchedules-200Response-example.json   
+          400:
+           body:
+            application/json:
+              type: common.commonError 
+              example: !include /libraries/common/examples/400Response-example.json
+          404:
+           body:
+            application/json:
+              type: common.commonError   
+              example: !include /libraries/common/examples/404Response-example.json
+          500:
+           body:
+            application/json:
+              type: common.commonError    
+              example: !include /libraries/common/examples/500Response-example.json
+
+                                
+                  
+                      
+               
+
+                    
+
+              
+          
+          
+          
+              
+          
+             
+
+            
+            
+                  
+          
+
+
+            
+
